@@ -433,6 +433,8 @@ const getUserPublicKey = async (user: string): Promise<string> => {
   return pubKeys[user] || "";
 };
 
+const getRpcUrl = (): string => sorobanRpcUrl;
+
 export const stellarService = {
   initialize,
   clear,
@@ -453,4 +455,6 @@ export const stellarService = {
   registerPublicKey,
   getUserPublicKey,
   isConfigured,
+  getContractId,
+  getRpcUrl,
 };
