@@ -1,0 +1,19 @@
+# Medusa campaign configuration for the SpooVault differential fuzzing suite.
+# See https://github.com/crytic/medusa/wiki/Configuration
+[workspace]
+# Compile every Solidity source under the repository root, not just this folder.
+rootDirectory = "../.."
+
+[fuzzing]
+# Number of parallel fuzzing workers.
+workers = 2
+# Overall fuzzing time budget (seconds).
+timeout = 600
+# Maximum number of calls per generated test sequence.
+maxCallsPerTest = 64
+# Stop the campaign once all invariant_* / property_* checks pass without revert.
+stopOnBug = true
+
+[compilation.solc]
+optimizerEnabled = true
+optimizerRuns = 200
