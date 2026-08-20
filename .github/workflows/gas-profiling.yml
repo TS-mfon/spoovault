@@ -98,6 +98,11 @@ jobs:
 
       - name: Benchmark (pull_request ➜ alert + comment)
         if: github.event_name == 'pull_request'
+        # On fork PRs the GITHUB_TOKEN cannot post PR comments, so we keep
+        # this step non-fatal; the regression failure gate is still enforced
+        # by the `node scripts/gas-benchmark.mjs` step above (it exits 1 on
+        # a >5% regression).
+        continue-on-error: true
         uses: benchmark-action/github-action-benchmark@v1
         with:
           name: SpooVault Gas
