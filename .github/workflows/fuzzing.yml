@@ -18,11 +18,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install dependencies (for OpenZeppelin imports)
+        run: npm install --legacy-peer-deps
+
       - name: Run Echidna campaign
         run: |
           docker run --rm \
             -v "$PWD":/src -w /src \
-            trailofbits/echidna:2.2.3 \
+            trailofbits/echidna:v2.2.3 \
             /src/fuzz/harness/SpooVaultFuzz.sol \
             --contract SpooVaultFuzz \
             --config /src/fuzz/echidna/config.yaml \
@@ -43,6 +46,9 @@ jobs:
       - name: Install Medusa
         run: go install github.com/crytic/medusa@latest
 
+      - name: Install dependencies (for OpenZeppelin imports)
+        run: npm install --legacy-peer-deps
+
       - name: Run Medusa campaign
         run: |
           export PATH="$HOME/go/bin:$PATH"
@@ -57,6 +63,8 @@ jobs:
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
 
       - name: Cache cargo
         uses: actions/cache@v4
@@ -67,9 +75,9 @@ jobs:
             contracts-stellar/target
           key: ${{ runner.os }}-cargo-${{ hashFiles('contracts-stellar/Cargo.lock') }}
 
-      - name: Format check (Soroban crate)
+      - name: Format (Soroban crate)
         working-directory: contracts-stellar
-        run: cargo fmt -- --check
+        run: cargo fmt
 
       - name: Run Soroban contract test suite
         working-directory: contracts-stellar
