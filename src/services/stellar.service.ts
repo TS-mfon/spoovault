@@ -162,7 +162,12 @@ let activeAccount: string | null = null;
 const sorobanRpcUrl = "https://soroban-testnet.stellar.org";
 let contractId = "";
 
-const getContractId = (): string => {
+export const getRpcUrl = (): string => {
+  const url = import.meta.env.VITE_STELLAR_RPC_URL as string | undefined;
+  return url || sorobanRpcUrl;
+};
+
+export const getContractId = (): string => {
   const cid = import.meta.env.VITE_STELLAR_CONTRACT_ADDRESS as string | undefined;
   return cid || contractId || "";
 };
@@ -1087,7 +1092,6 @@ const resolveEvmToPublicKey = async (evmAddress: string): Promise<string | null>
   return null;
 };
 
-
 export const stellarService = {
   initialize,
   clear,
@@ -1095,6 +1099,8 @@ export const stellarService = {
   connectWallet,
   getActiveNetwork,
   getNetwork,
+  getRpcUrl,
+  getContractId,
   subscribeToWalletChanges,
   createVault,
   getVault,
