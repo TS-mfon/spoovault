@@ -1,0 +1,13 @@
+{
+  "SpooVault.acceptGuardianInvite": 101770,
+  "SpooVault.approveGuardianRemoval": 92633,
+  "SpooVault.approveThresholdUpdate": 91229,
+  "SpooVault.createVault": 635133,
+  "SpooVault.executeVaultReconfiguration": 80223,
+  "SpooVault.proposeGuardianRemoval": 148917,
+  "SpooVault.proposeThresholdUpdate": 146227,
+  "SpooVault.proveLife": 35046,
+  "SpooVault.registerPublicKey": 69291,
+  "SpooVault.setEmergencyMode": 52006,
+  "SpooVault.constructor": 4728364
+}
