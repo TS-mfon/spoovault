@@ -111,7 +111,8 @@ class SorobanEventWatcher {
 
     if (payload.params.startLedger === 0) return; 
 
-    const response = await fetch(this.rpcUrl, {
+    const fetchImpl = typeof globalThis !== "undefined" && globalThis.fetch ? globalThis.fetch : fetch;
+    const response = await fetchImpl(this.rpcUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -142,7 +143,8 @@ class SorobanEventWatcher {
   
   private async getLatestLedger(): Promise<number> {
     try {
-      const response = await fetch(this.rpcUrl, {
+      const fetchImpl = typeof globalThis !== "undefined" && globalThis.fetch ? globalThis.fetch : fetch;
+      const response = await fetchImpl(this.rpcUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
