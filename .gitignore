@@ -50,3 +50,11 @@ gas-summary.json
 target/
 contracts-stellar/target/
 
+# Web3 E2E (Synpress / Playwright)
+.cache-synpress/
+e2e/.env.e2e
+playwright-report/
+test-results/
+blob-report/
+.playwright/
+
